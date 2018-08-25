@@ -11,6 +11,6 @@ def die(count):
 	elif count==4:
 		with open("man4.txt",'r') as fi:
 			print (fi.read())
-			print("better luck next time!")
+			
 
 

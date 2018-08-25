@@ -1,14 +1,14 @@
 import os
 from hang_man import die
 word={'1':['h', 'r', 'y', 'p', 't', 'e'], '2':['i', 'o', 'm', 'a'], '3':['t', 'o'], '4':['d', 's', 't', 'a', 'g'], '5':['w', 't', 'h', 'u', 'e']}
-count=0	
+
 def ini():
 	print("\n 1\n 2\n 3\n 4\n 5")
 	ch=input("choose the word behind nos: ")
-	return ch
+	return ch #stores the no 
 	
 def playAgain():
-	choc=input("do you want to play aganin? (Y/N): ")
+	choc=input("do you want to play aganin? (Y/N): ")#stores yes or no opt
 	if choc=='y':
 		comp()
 
@@ -20,43 +20,56 @@ def playAgain():
 		os.system("cls")
 
 def compare(cho):
-	for i in range (len(word[cho])):
+	wcount=0
+	rcount=0
+	length=len(word[cho])
+	print(length)
+	for i in range (len(word[cho])+4): #stores value in ch
 		letter=input("guess the missing letter: ")	
-		if letter in word[cho]:
+		if rcount<length and letter in word[cho] :
+			rcount+=1
 			print("your guess is correct.")
 
-		else:
-			print("sorry, your guess is wrong. please try again ")
+		if letter not in word[cho] and wcount<=4 :
+			wcount+=1
+			die(wcount)
+
+		if rcount==length:
+			print("congratulations!!! you have guessed the correct word")
+			playAgain()
+		
+		if wcount>4:
+			print("OOPS!! You have lost your chances")
+			input("press any key: ")
+			os.system("cls")
+			exit()
 
 			
-			
-	print("congratulations!!! you have guessed the correct word")
-	playAgain()
-
+	
 def comp():
-	ch=ini()
-	if ch=='1':
+	choose=ini()
+	if choose=='1':
 		print("_A_R_  _O_T_R ")
-		compare(ch)
+		compare(choose)
 
-	elif ch=='2':
+	elif choose=='2':
 		print("_R_N  _ _N")
-		compare(ch)
+		compare(choose)
 
-	elif ch=='3':
+	elif choose=='3':
 		print("_H_R")
-		compare(ch)
+		compare(choose)
 
-	elif ch=='4':
+	elif choose=='4':
 		print("_R  _ _R_N_E")
-		compare(ch)
+		compare(choose)
 
-	elif ch=='5':
+	elif choose=='5':
 		print("_I_C_  	_ _NT_R")
-		compare(ch)
+		compare(choose)
 
 	else:
 		print("invalid choice!")
 
 comp()
-die(4)
+
